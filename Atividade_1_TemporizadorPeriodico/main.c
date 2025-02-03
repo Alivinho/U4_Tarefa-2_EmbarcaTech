@@ -24,10 +24,17 @@ int main()
     struct repeating_timer timer;
     add_repeating_timer_ms(3000, temporizador_callback, NULL, &timer);
 
+    // Inicia o código com o LED Vermelho ligado
     gpio_put(LED_RED_PIN, 1);
 
     while (true) {
-        printf("Semáforo ativo: Estado %d\n", statusLed);
+        if(statusLed == 0){
+            printf("\nPassagem Proibida: Led Vermelho Acesso");
+        }else if(statusLed == 1){
+            printf("\nCuidado!!");   
+        }else{
+            printf("\nPassagem Permitida: Led Verde Acesso");
+        }
         sleep_ms(1000);
     }
 }
@@ -49,8 +56,10 @@ bool temporizador_callback(struct repeating_timer *t){
     gpio_put(LED_GREEN_PIN, 0);
 
     if (statusLed == 0) {
-        gpio_put(LED_RED_PIN, 1); // Próximo: amarelo
-        gpio_put(LED_GREEN_PIN, 1);
+        gpio_put(LED_YELLOW_PIN, 1); // Próximo: amarelo
+
+        //gpio_put(LED_RED_PIN, 1); 
+        //gpio_put(LED_GREEN_PIN, 1);
         statusLed = 1;
     } else if (statusLed == 1) {
         gpio_put(LED_GREEN_PIN, 1); // Próximo: verde
