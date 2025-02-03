@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = "../build/Atividade_2_TemporizadorDisparo.uf2"
+elf = "../build/Atividade_2_TemporizadorDisparo.elf"
