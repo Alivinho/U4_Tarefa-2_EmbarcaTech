@@ -46,7 +46,10 @@ pico_enable_stdio_usb(Atividade_1_TemporizadorPeriodico 1)
 
 # Add the standard library to the build
 target_link_libraries(Atividade_1_TemporizadorPeriodico
-        pico_stdlib)
+        pico_stdlib
+        hardware_timer
+        
+)
 
 # Add the standard include files to the build
 target_include_directories(Atividade_1_TemporizadorPeriodico PRIVATE
