@@ -29,11 +29,11 @@ int main() {
     
     while (1) {
          if (sistema_ativo) {
-            printf("Sistema ativo: LEDs em processo de desligamento.");
+            printf("Sistema ativo: LEDs em processo de desligamento.\n");
         } else {
-            printf("Sistema inativo: Aguardando acionamento do botão.");
+            printf("\nSistema inativo: Aguardando acionamento do botão.\n");
         }
-        sleep_ms(1000);
+        sleep_ms(3000);
     }
 }
 
@@ -64,6 +64,7 @@ void botao_irq_handler(uint gpio, uint32_t events) {
         gpio_put(LED_RED_PIN, 1);
        
         add_alarm_in_ms(3000, desligar_leds_callback, NULL, false);
+        printf("\nTodos os LEDS acessos!\n");
     }
 }
 
@@ -72,15 +73,20 @@ int64_t desligar_leds_callback(alarm_id_t id, void *user_data) {
     
     if (estado == 0) {
         gpio_put(LED_GREEN_PIN, 0);
+        printf("\nLED Verde apagado!\n");
         
         estado++;
         add_alarm_in_ms(3000, desligar_leds_callback, NULL, false);
     } else if (estado == 1) {
         gpio_put(LED_BLUE_PIN, 0);
+        printf("\nLED Azul apagado!\n");
+
         estado++;
         add_alarm_in_ms(3000, desligar_leds_callback, NULL, false);
     } else {
         gpio_put(LED_RED_PIN, 0);
+        printf("\nLED Vermelho apagado!\n");
+
         sistema_ativo = false;
         estado = 0;
     }
