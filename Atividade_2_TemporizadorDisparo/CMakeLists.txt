@@ -48,6 +48,8 @@ pico_enable_stdio_usb(Atividade_2_TemporizadorDisparo 1)
 target_link_libraries(Atividade_2_TemporizadorDisparo
         pico_stdlib
         pico_time
+        hardware_gpio
+        hardware_timer
 )
 
 # Add the standard include files to the build
